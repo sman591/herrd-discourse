@@ -1,0 +1,11 @@
+<div id="topic-title">
+  <div class="container">
+    <div class="title-wrapper">
+        <h1>Mobile API Key</h1>
+    </div>
+  </div>
+</div>
+<p>This is your API key:</p>
+<p><code><%= @api_key %></code></p>
+<p><a href="<%= @login_url %>" class="btn btn-primary"><i class="fa fa-sign-in"></i> Click here to login to the mobile app</a></p>
+<p><%= link_to '<i class="fa fa-refresh"></i> Regenerate API key'.html_safe, :regenerate, class: "btn" %></p>
