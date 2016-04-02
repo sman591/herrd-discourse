@@ -1,0 +1,37 @@
+language: ruby
+cache:
+  directories:
+    - discourse/vendor/bundle
+services:
+  - postgresql
+  - redis-server
+addons:
+  postgresql: 9.3
+  apt:
+    packages:
+    - gifsicle
+    - jpegoptim
+    - optipng
+    - jhead
+  code_climate:
+    repo_token: a76a860c9b58dc41659a39e5b2256c48795fc47e5a25680b69f541494baced50
+services:
+  - redis-server
+rvm:
+  - 2.0.0
+env:
+  - LOAD_PLUGINS=1 RUN_COVERAGE=1
+before_install:
+  - cd discourse
+  - git init
+  - git remote add -t \* -f origin https://github.com/discourse/discourse.git
+  - git checkout tags/latest-release
+  - mkdir plugins/discourse-mobile
+  - cd ..
+  - shopt -s extglob dotglob
+  - mv !(discourse) discourse/plugins/discourse-mobile/
+  - shopt -u dotglob
+  - cd discourse
+script:
+  - bundle exec rake db:create db:migrate
+  - bundle exec rspec plugins/discourse-mobile/spec

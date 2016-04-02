@@ -1,0 +1,2 @@
+module DiscourseMobile
+end
