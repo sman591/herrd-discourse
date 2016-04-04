@@ -1,7 +1,7 @@
 module DiscourseMobile
   class RoutesController < ApplicationController
 
-    before_filter :ensure_logged_in
+    before_filter :ensure_logged_in, except: [:verify_plugin]
     skip_before_filter :check_xhr, :preload_json
 
     layout "no_ember"
@@ -18,6 +18,10 @@ module DiscourseMobile
 
     def login
       redirect_to mobile_login_url
+    end
+
+    def verify_plugin
+      render json: { plugin_installed: true }
     end
 
     private
