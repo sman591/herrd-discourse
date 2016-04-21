@@ -2,3 +2,6 @@ plugins:
   mobile_enabled:
     default: true
     client: true
+  mobile_api_key:
+    default: ""
+    client: false

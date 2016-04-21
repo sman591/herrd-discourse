@@ -14,11 +14,17 @@ end
 # load the engine
 load File.expand_path('../lib/discourse_mobile.rb', __FILE__)
 load File.expand_path('../lib/discourse_mobile/engine.rb', __FILE__)
+load File.expand_path('../lib/discourse_mobile/exceptions.rb', __FILE__)
+load File.expand_path('../lib/discourse_mobile/notifier.rb', __FILE__)
 
 after_initialize do
 
-  on(:post_created) do |post|
+  Notification.class_eval do
+    after_commit :send_to_herrd, on: :create
 
+    def send_to_herrd
+      Jobs.enqueue(:herrd_notifier, notification_id: id)
+    end
   end
 
 end

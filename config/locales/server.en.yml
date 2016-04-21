@@ -1,3 +1,4 @@
 en:
   site_settings:
     mobile_enabled: "Enable the mobile plugin"
+    mobile_api_key: "API key to transmit push notifications"
