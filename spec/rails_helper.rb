@@ -5,7 +5,7 @@ if ENV['RUN_COVERAGE']
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.configure do |config|
     config.path_prefix = "discourse" #the root of your Rails application relative to the repository root
-    config.git_dir = "plugins/discourse-mobile" #the relative or absolute location of your git root compared to where your tests are run
+    config.git_dir = "plugins/herrd-discourse" #the relative or absolute location of your git root compared to where your tests are run
   end
   SimpleCov.add_filter "discourse/app"
   SimpleCov.add_filter "discourse/lib"
@@ -13,7 +13,7 @@ if ENV['RUN_COVERAGE']
   FakeWeb.allow_net_connect = %r[^https?://codeclimate.com]
 end
 
-path = "./plugins/discourse-mobile/plugin.rb"
+path = "./plugins/herrd-discourse/plugin.rb"
 source = File.read(path)
 plugin = Plugin::Instance.new(Plugin::Metadata.parse(source), path)
 plugin.activate!

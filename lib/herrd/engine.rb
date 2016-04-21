@@ -1,11 +1,11 @@
-module DiscourseMobile
+module Herrd
   class Engine < ::Rails::Engine
-    isolate_namespace DiscourseMobile
+    isolate_namespace Herrd
 
-    initializer('discourse_mobile',
+    initializer('herrd',
                 after: :load_config_initializers) do |app|
       Rails.application.routes.prepend do
-        mount DiscourseMobile::Engine, at: '/mobile'
+        mount Herrd::Engine, at: '/herrd'
       end
     end
   end

@@ -26,12 +26,12 @@ before_install:
   - git init
   - git remote add -t \* -f origin https://github.com/discourse/discourse.git
   - git checkout tags/latest-release
-  - mkdir plugins/discourse-mobile
+  - mkdir plugins/herrd-discourse
   - cd ..
   - shopt -s extglob dotglob
-  - mv !(discourse) discourse/plugins/discourse-mobile/
+  - mv !(discourse) discourse/plugins/herrd-discourse/
   - shopt -u dotglob
   - cd discourse
 script:
   - bundle exec rake db:create db:migrate
-  - bundle exec rspec plugins/discourse-mobile/spec
+  - bundle exec rspec plugins/herrd-discourse/spec

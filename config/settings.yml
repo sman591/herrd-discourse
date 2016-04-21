@@ -1,7 +1,7 @@
 plugins:
-  mobile_enabled:
+  herrd_enabled:
     default: true
     client: true
-  mobile_api_key:
+  herrd_api_key:
     default: ""
     client: false

@@ -8,7 +8,7 @@ module Herrd
       notification_text = notification.text_description + notification.topic.title
 
       @data = {
-        api_key: SiteSetting.mobile_api_key,
+        api_key: SiteSetting.herrd_api_key,
         contents: {
           en: notification_text
         },
