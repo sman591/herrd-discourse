@@ -1,4 +1,4 @@
-module DiscourseMobile
+module Herrd
   class RoutesController < ApplicationController
 
     before_filter :ensure_logged_in, except: [:verify_plugin]
@@ -9,7 +9,7 @@ module DiscourseMobile
 
     def index
       @api_key = api_key
-      @login_url = mobile_login_url
+      @login_url = herrd_login_url
     end
 
     def regenerate
@@ -18,7 +18,7 @@ module DiscourseMobile
     end
 
     def login
-      redirect_to mobile_login_url
+      redirect_to herrd_login_url
     end
 
     def verify_plugin
@@ -40,8 +40,8 @@ module DiscourseMobile
         ApiKey.create(key: SecureRandom.hex(32), created_by: current_user, user: current_user)
       end
 
-      def mobile_login_url
-        "discoursemobile://auth/#{api_key}"
+      def herrd_login_url
+        "herrd://auth/#{api_key}"
       end
 
   end

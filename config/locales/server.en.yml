@@ -1,3 +1,4 @@
 en:
   site_settings:
-    mobile_enabled: "Enable the mobile plugin"
+    herrd_enabled: "Enable the Herrd plugin"
+    herrd_api_key: "API key to transmit push notifications"
