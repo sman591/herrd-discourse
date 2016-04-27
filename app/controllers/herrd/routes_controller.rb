@@ -1,9 +1,11 @@
 module Herrd
-  class RoutesController < ApplicationController
+  class RoutesController < ::ApplicationController
+
+    before_filter :herrd_redirect_to_login_if_required, only: :login
+    skip_before_filter :redirect_to_login_if_required, only: :login
 
     before_filter :ensure_logged_in, except: [:verify_plugin]
     skip_before_filter :check_xhr, :preload_json
-    skip_before_filter :redirect_to_login_if_required, only: :verify_plugin
 
     layout "no_ember"
 
@@ -18,7 +20,7 @@ module Herrd
     end
 
     def login
-      redirect_to herrd_login_url
+      @login_url = herrd_login_url
     end
 
     def verify_plugin
@@ -42,6 +44,20 @@ module Herrd
 
       def herrd_login_url
         "herrd://auth/#{api_key}"
+      end
+
+      def herrd_redirect_to_login_if_required
+        return if current_user || (request.format.json? && api_key_valid?)
+
+        if SiteSetting.enable_sso?
+          # save original URL in a session so we can redirect after login
+          session[:destination_url] = destination_url
+          redirect_to path('/session/sso')
+        else
+          # save original URL in a cookie (javascript redirects after login in this case)
+          cookies[:destination_url] = destination_url
+          redirect_to path('/login')
+        end
       end
 
   end
