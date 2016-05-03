@@ -43,7 +43,7 @@ module Herrd
       end
 
       def herrd_login_url
-        "herrd://auth/#{api_key}"
+        "herrd://auth?api_key=#{api_key}&username=#{current_user.username}"
       end
 
       def herrd_redirect_to_login_if_required
