@@ -5,7 +5,11 @@ module Herrd
     def deliver notification
       return if notification.read?
 
-      notification_text = notification.text_description + notification.topic.title
+      notification_text = notification.text_description
+
+      if notification.topic.present?
+        notification_text += notification.topic.title
+      end
 
       @data = {
         api_key: SiteSetting.herrd_api_key,
